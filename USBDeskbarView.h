@@ -56,7 +56,7 @@ protected:
 			void		MountDevice(BMessage *device);		// ajout periph USB
 			void		UnmountDevice(BMessage *device);	// retirer un periph USB
 			void		BuildMenu();						// creation du menu en fonction de la liste d'item
-			BBitmap		*GetBitmap(const char *name);		// trouver une image dans les ressources
+			BBitmap		*GetBitmap(const char *name, size_t size = 32);		// trouver une image dans les ressources
 };
 
 #endif

@@ -24,6 +24,7 @@
 #include <interface/Menu.h>
 #include <interface/MenuItem.h>
 #include <support/String.h>
+#include <IconUtils.h>
 
 #include <Path.h>
 #include <Alert.h>
@@ -210,12 +211,12 @@ void USBDeskbarView::AttachedToWindow()
 	// creer le roster
 	// et l'image
 	_usbRoster = new USBDeskbarRoster(this);
-	_icon = GetBitmap("USBDeskBarIcon");
-	_mountIcon = GetBitmap("USBMount");
-	_unmountIcon = GetBitmap("USBUnmount");
+	_icon = GetBitmap("USBDeskBarIcon", 16);
+	_mountIcon = GetBitmap("USBMount", 16);
+	_unmountIcon = GetBitmap("USBUnmount", 16);
 	_menu = new BPopUpMenu("devices-menu");
 	_prefs = new USBPreferenceFile("USBDeskbarView");
-	_iconLarge = GetBitmap("USBLargeIcon");
+	_iconLarge = GetBitmap("USBConnector");
 		
 	// attachement
 	BView::AttachedToWindow();
@@ -354,25 +355,24 @@ void USBDeskbarView::UnmountDevice(BMessage *device)
 // =================
 
 /**** trouver une image dans les ressources ****/
-BBitmap *USBDeskbarView::GetBitmap(const char *name)
+BBitmap *USBDeskbarView::GetBitmap(const char *name, size_t size)
 {
 	BBitmap 	*bitmap = NULL;
 	size_t 		len = 0;
 	status_t 	error;	
 
 	// charger depuis les ressources
-	const void *data = _resource.LoadResource('BBMP', name, &len);
+	const void *data = _resource.LoadResource(B_VECTOR_ICON_TYPE, name, &len);
 
-	BMemoryIO stream(data, len);
-	
-	// charge l'image archivé
-	BMessage archive;
-	error = archive.Unflatten(&stream);
-	if (error != B_OK)
-		return NULL;
+	if (data != NULL) {
+		bitmap = new BBitmap(BRect(0, 0, size - 1, size - 1), B_RGBA32);
+		if (bitmap->InitCheck() != B_OK	||
+			BIconUtils::GetVectorIcon((const uint8 *)data, len, bitmap) != B_OK) {
+			delete bitmap;
+			bitmap = NULL;
+		}
+	}
 
-	// on va essayer de la recreer
-	bitmap = new BBitmap(&archive);
 	if(!bitmap)
 		return NULL;
 
