@@ -171,7 +171,7 @@ bool USBPreferenceFile::GetBool(bool defaultValue,const char *name,int32 index)
 }
 
 /**** recuperer un couleur ****/
-rgb_color USBPreferenceFile::GetRGBColor(rgb_color defaultValue,const char *name,int32 index = 0)
+rgb_color USBPreferenceFile::GetRGBColor(rgb_color defaultValue,const char *name,int32 index)
 {
 	rgb_color	result;
 

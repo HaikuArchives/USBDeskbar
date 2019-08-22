@@ -13,14 +13,14 @@
 #include <interface/View.h>
 #include <support/String.h>
 
-class USBDevice;
+class BUSBDevice;
 class BHandler;
 class BMessenger;
 class BTextView;
 class BitmapView;
-class USBConfiguration;
-class USBInterface;
-class USBEndpoint;
+class BUSBConfiguration;
+class BUSBInterface;
+class BUSBEndpoint;
 
 class USBDeskbarInfoWin : public BWindow
 {
@@ -29,18 +29,18 @@ public:
 	virtual	~USBDeskbarInfoWin();
 
 	virtual	bool	QuitRequested();						// quitter la fenetre
-			void	SetInfo(USBDevice *dev,BBitmap *icon);	// definir les infos a afficher
+			void	SetInfo(BUSBDevice *dev,BBitmap *icon);	// definir les infos a afficher
 
 protected:
-	USBDevice	*_device;			// device d'ou prendre les infos
+	BUSBDevice	*_device;			// device d'ou prendre les infos
 	BMessenger	*_viewMessenger;	// pour envoyer des message a la vue
 	BTextView	*_initialInfo;		// info standard
 	BTextView	*_specialsInfo;		// info speciales	
 	BitmapView	*_bitmapView;		// pour l'icon
 
-			void	AddConfiguration(BString &buffer,const USBConfiguration *config);			// lister les configurations
-			void	AddInterface(BString &buffer,const USBInterface *interface);				// lister les interfaces
-			void	AddEndPoint(BString &buffer,const USBEndpoint *endpoint);					// lister les EndPoint
+			void	AddConfiguration(BString &buffer,const BUSBConfiguration *config);			// lister les configurations
+			void	AddInterface(BString &buffer,const BUSBInterface *interface);				// lister les interfaces
+			void	AddEndPoint(BString &buffer,const BUSBEndpoint *endpoint);					// lister les EndPoint
 			void	AddClassName(BString &buffer,uint8 Class);									// ajouter le nom de la classe
 			void	AddSubclassName(BString &buffer,uint8 Class,uint8 Subclass);				// type de la sous-classe
 			void	AddProtocolName(BString &buffer,uint8 Class,uint8 Subclass,uint8 Protocol);	// nom du protocole

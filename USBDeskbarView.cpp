@@ -62,7 +62,7 @@ USBDeskbarView *USBDeskbarView::Instantiate(BMessage *data)
 }
 
 /**** archivage de la vue ****/
-status_t USBDeskbarView::Archive(BMessage *data, bool deep = true) const
+status_t USBDeskbarView::Archive(BMessage *data, bool deep) const
 {
 	BView::Archive(data, deep);
 	data->AddString("add_on","application/x-vnd.CKJ.USBDeskbarView");
@@ -155,11 +155,11 @@ void USBDeskbarView::MouseDown(BPoint where)
 	}
 	else
 	{
-		USBDevice			*dev;
+		BUSBDevice			*dev;
 		
 		// recuperer le device
 		_indexSee = index;
-		dev = (USBDevice *)(_deviceList.ItemAt(_indexSee));
+		dev = (BUSBDevice *)(_deviceList.ItemAt(_indexSee));
 		if(dev==NULL)
 			return;
 			
@@ -262,7 +262,7 @@ void USBDeskbarView::DetachedFromWindow()
 /**** creation du menu en fonction de la liste d'item ****/
 void USBDeskbarView::BuildMenu()
 {
-	USBDevice	*device = NULL;
+	BUSBDevice	*device = NULL;
 	BString		product;
 	
 	// on va parcourir la liste et ajouter les item
@@ -272,7 +272,7 @@ void USBDeskbarView::BuildMenu()
 	_menu = new BPopUpMenu("devices-menu");
 	for(int32 index=0;index<_deviceList.CountItems();index++)
 	{
-		device = (USBDevice *)(_deviceList.ItemAt(index));
+		device = (BUSBDevice *)(_deviceList.ItemAt(index));
 		if(device!=NULL)
 		{
 			// on affiche ce que c'est et qui la fabriqué
@@ -299,7 +299,7 @@ void USBDeskbarView::BuildMenu()
 /**** ajout periph USB ****/
 void USBDeskbarView::MountDevice(BMessage *device)
 {
-	USBDevice	*dev = NULL;
+	BUSBDevice	*dev = NULL;
 	
 	// recuperer le pointer sur le device
 	if(device->FindPointer(USB_DEVICE_POINTER,(void **)&dev)!=B_OK)
@@ -323,7 +323,7 @@ void USBDeskbarView::MountDevice(BMessage *device)
 /**** retirer un periph USB ****/
 void USBDeskbarView::UnmountDevice(BMessage *device)
 {
-	USBDevice	*dev = NULL;
+	BUSBDevice	*dev = NULL;
 	
 	// recuperer le pointer sur le device
 	if(device->FindPointer(USB_DEVICE_POINTER,(void **)&dev)!=B_OK)

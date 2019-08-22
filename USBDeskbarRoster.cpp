@@ -26,7 +26,7 @@ USBDeskbarRoster::~USBDeskbarRoster()
 }
 
 /**** Ajout d'un peripherique ****/	
-status_t USBDeskbarRoster::DeviceAdded(USBDevice *dev)
+status_t USBDeskbarRoster::DeviceAdded(BUSBDevice *dev)
 {
 	// verifier que le divice est bon
 	if(dev==NULL)
@@ -49,7 +49,7 @@ status_t USBDeskbarRoster::DeviceAdded(USBDevice *dev)
 }
 
 /**** Enlevement d'un peripherique ****/	
-void USBDeskbarRoster::DeviceRemoved(USBDevice *dev)
+void USBDeskbarRoster::DeviceRemoved(BUSBDevice *dev)
 {
 	// envoyer le message a la vue
 	BMessage	unmount(USB_UNMOUNT_DEVICE_MSG);

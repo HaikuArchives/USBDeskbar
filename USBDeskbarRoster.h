@@ -9,19 +9,19 @@
 /**************/
 /* USB Roster */
 /**************/
-#include "USBKit.h"
+#include <USBKit.h>
 
 class BMessenger;
 class BHandler;
 
-class USBDeskbarRoster : public USBRoster
+class USBDeskbarRoster : public BUSBRoster
 {
 public:
 	USBDeskbarRoster(BHandler *view);
 	~USBDeskbarRoster();
 	
-	virtual	status_t	DeviceAdded(USBDevice *dev);		// ajout d'un periph
-	virtual	void		DeviceRemoved(USBDevice *dev);			// enlever un periph
+	virtual	status_t	DeviceAdded(BUSBDevice *dev);		// ajout d'un periph
+	virtual	void		DeviceRemoved(BUSBDevice *dev);			// enlever un periph
 
 protected:
 	BMessenger		*_viewMessenger;	// messenger pour envoyer a la vue les infos

@@ -9,12 +9,12 @@
 /***********************/
 #include "USBDeskbarInfoWin.h"
 #include "USBdvMessageDefs.h"
-#include "USBKit.h"
 #include <app/Messenger.h>
 #include <interface/TextView.h>
 #include <interface/Bitmap.h>
 #include <interface/InterfaceDefs.h>
 #include <interface/ScrollView.h>
+#include <USBKit.h>
 #include <stdio.h>
 
 /**** constructeur ****/
@@ -72,7 +72,7 @@ bool USBDeskbarInfoWin::QuitRequested()
 }
 
 /**** definir les infos a afficher ****/
-void USBDeskbarInfoWin::SetInfo(USBDevice *dev,BBitmap *icon)
+void USBDeskbarInfoWin::SetInfo(BUSBDevice *dev,BBitmap *icon)
 {
 	BString		buffer;
 	
@@ -115,7 +115,7 @@ void USBDeskbarInfoWin::SetInfo(USBDevice *dev,BBitmap *icon)
 // =====================================
 
 /**** lister les configurations ****/
-void USBDeskbarInfoWin::AddConfiguration(BString &buffer,const USBConfiguration *config)
+void USBDeskbarInfoWin::AddConfiguration(BString &buffer,const BUSBConfiguration *config)
 {
 	// est t-elle valide
 	if(config==NULL)
@@ -130,7 +130,7 @@ void USBDeskbarInfoWin::AddConfiguration(BString &buffer,const USBConfiguration 
 }
 
 /**** lister les interfaces ****/
-void USBDeskbarInfoWin::AddInterface(BString &buffer,const USBInterface *interface)
+void USBDeskbarInfoWin::AddInterface(BString &buffer,const BUSBInterface *interface)
 {
 	// est t-elle valide
 	if(interface==NULL)
@@ -173,7 +173,7 @@ void USBDeskbarInfoWin::AddInterface(BString &buffer,const USBInterface *interfa
 }
 
 /**** lister les EndPoint ****/
-void USBDeskbarInfoWin::AddEndPoint(BString &buffer,const USBEndpoint *endpoint)
+void USBDeskbarInfoWin::AddEndPoint(BString &buffer,const BUSBEndpoint *endpoint)
 {
 	// est t-il valide
 	if(endpoint==NULL)
