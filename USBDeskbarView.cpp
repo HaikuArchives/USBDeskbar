@@ -110,7 +110,8 @@ void USBDeskbarView::MessageReceived(BMessage *message)
 void USBDeskbarView::Draw(BRect updateRect)
 {
 	// color of the deskbar tray view
-	SetHighColor(tint_color(ui_color(B_MENU_BACKGROUND_COLOR),B_DARKEN_1_TINT));
+	SetDrawingMode(B_OP_COPY);
+	SetHighColor(Parent()->ViewColor());
 	FillRect(Bounds());
 	
 	SetDrawingMode(B_OP_OVER);
